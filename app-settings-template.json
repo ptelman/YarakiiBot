@@ -1,0 +1,11 @@
+{
+  "Settings": {
+    "Username": "xxx",
+    "Password": "yyy",
+    "PrivilegedUsers": [
+        "bb",
+        "aa"
+    ],
+    "Channel": "channel"
+  }
+}
