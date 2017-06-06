@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using YarakiiBot.Base;
 
 namespace YarakiiBot.IRC{
@@ -7,7 +8,7 @@ namespace YarakiiBot.IRC{
     {
         private IList<IMessageReceiver> receivers;
 
-        public IrcService()
+        public IrcService(IOptions<Settings> settings)
         {
             receivers = new List<IMessageReceiver>();
         }
@@ -29,7 +30,7 @@ namespace YarakiiBot.IRC{
         }
 
         private void Connect(){
-            
+
         }
     }
 }
