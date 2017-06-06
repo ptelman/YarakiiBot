@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace YarakiiBot.Model{
-    public class UserContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<SongRequest> SongRequests { get; set; }

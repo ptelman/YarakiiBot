@@ -1,4 +1,5 @@
 ﻿using System;
+using YarakiiBot.Model;
 
 namespace YarakiiBot
 {

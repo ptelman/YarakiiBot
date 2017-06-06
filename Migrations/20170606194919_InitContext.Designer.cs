@@ -7,10 +7,11 @@ using YarakiiBot.Model;
 
 namespace YarakiiBot.Migrations
 {
-    [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DatabaseContext))]
+    [Migration("20170606194919_InitContext")]
+    partial class InitContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");

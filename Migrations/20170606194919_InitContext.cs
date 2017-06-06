@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace YarakiiBot.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
