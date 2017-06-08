@@ -8,9 +8,10 @@ using YarakiiBot.Model;
 namespace YarakiiBot.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20170607192033_AddedMessagesPerUser")]
+    partial class AddedMessagesPerUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");

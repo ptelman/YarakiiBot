@@ -1,5 +1,5 @@
 namespace YarakiiBot.Base{
-    public interface IIrcService
+    public interface IIrcManager
     {
         void SendMessage(string message);
         void Subscribe(IMessageReceiver messageReceiver);

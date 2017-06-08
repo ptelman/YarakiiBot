@@ -1,5 +1,5 @@
 namespace YarakiiBot.Base{
     public interface IMessageReceiver{
-        void HandleIncommingMessage(string message);
+        void HandleIncommingMessage(string user, string message);
     }
 }
