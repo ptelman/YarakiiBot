@@ -12,6 +12,12 @@ namespace YarakiiBot.Model{
             optionsBuilder.UseSqlite("Data Source=yarakiiDatabase.db");
         }
 
+        public User GetUserByName(string nickname){
+            var task = Users.SingleOrDefaultAsync(u => u.Username == nickname);
+            task.Wait();
+            return task.Result;
+        }
+
         public void AddPointsToUser(string nickname, int points){
             var task = Users.SingleOrDefaultAsync(u => u.Username == nickname);
             task.Wait();

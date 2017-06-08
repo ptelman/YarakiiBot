@@ -4,11 +4,10 @@ using YarakiiBot.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using YarakiiBot.Base;
-using YarakiiBot.IRC;
 using System.Threading;
 using YarakiiBot.Service;
 using YarakiiBot.MessageHandler;
-using YarakiiBot.Modules.ChatModule;
+using YarakiiBot.Modules;
 
 namespace YarakiiBot
 {
@@ -23,14 +22,15 @@ namespace YarakiiBot
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var chatModule = serviceProvider.GetService<ChatModule>();
             chatModule.Start();
+            var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
+            chatModule.SubscribeToNewMessages(userMessagesCountHandler);
+            chatModule.SubscribeToCommands(userMessagesCountHandler);
 
-            //var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
             //ircManager.Subscribe(userMessagesCountHandler);
             Thread.Sleep(10000000);
         }
 
         private static void ConfigureSingletons(IServiceCollection serviceCollection){
-            serviceCollection.AddTransient<IIrcManager, IrcManager>();
             serviceCollection.AddTransient<ILogger, Logger>();
             serviceCollection.AddSingleton<DatabaseContext,DatabaseContext>();
             serviceCollection.AddSingleton<UserMessagesCount,UserMessagesCount>();
