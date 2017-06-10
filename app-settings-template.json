@@ -1,11 +1,14 @@
 {
   "Settings": {
     "Username": "xxx",
-    "Password": "yyy",
+    "AccessToken": "yyy",
     "PrivilegedUsers": [
         "bb",
         "aa"
     ],
-    "Channel": "channel"
+    "Channel": "channel",
+    "ClientId" : "clientid",
+    "ClientSecret": "xx",
+    "ChannelId": "36938827"
   }
 }

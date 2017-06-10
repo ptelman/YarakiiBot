@@ -20,13 +20,22 @@ namespace YarakiiBot
             ConfigureSingletons(serviceCollection);
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var chatModule = serviceProvider.GetService<ChatModule>();
-            chatModule.Start();
-            var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
-            chatModule.SubscribeToNewMessages(userMessagesCountHandler);
-            chatModule.SubscribeToCommands(userMessagesCountHandler);
+
+            var rewardModule = serviceProvider.GetService<RewardActiveUsersModule>();
+            rewardModule.Start();
+
+
+            #region CHAT MODULE
+            // var chatModule = serviceProvider.GetService<ChatModule>();
+            // chatModule.Start();
+
+            // var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
+            // chatModule.SubscribeToNewMessages(userMessagesCountHandler);
+            // chatModule.SubscribeToCommands(userMessagesCountHandler);
 
             //ircManager.Subscribe(userMessagesCountHandler);
+            #endregion
+
             Thread.Sleep(10000000);
         }
 
@@ -35,6 +44,7 @@ namespace YarakiiBot
             serviceCollection.AddSingleton<DatabaseContext,DatabaseContext>();
             serviceCollection.AddSingleton<UserMessagesCount,UserMessagesCount>();
             serviceCollection.AddSingleton<ChatModule,ChatModule>();
+            serviceCollection.AddSingleton<RewardActiveUsersModule,RewardActiveUsersModule>();
         }
 
         private static void ConfigureSettings(IServiceCollection serviceCollection){

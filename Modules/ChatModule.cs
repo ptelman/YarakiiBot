@@ -22,7 +22,7 @@ namespace YarakiiBot.Modules{
         
         public void Start()
         {
-            var credentials = new ConnectionCredentials(this.settings.Username, this.settings.Password);
+            var credentials = new ConnectionCredentials(this.settings.Username, this.settings.AccessToken);
             client = new TwitchClient(credentials, this.settings.Channel, '!', '!', false);
             client.OnConnected+= Client_OnConnected;
             client.OnMessageReceived+= Client_OnGotMessage;
