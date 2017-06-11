@@ -24,16 +24,17 @@ namespace YarakiiBot
             var rewardModule = serviceProvider.GetService<RewardActiveUsersModule>();
             rewardModule.Start();
 
-
             #region CHAT MODULE
-            // var chatModule = serviceProvider.GetService<ChatModule>();
-            // chatModule.Start();
+            var chatModule = serviceProvider.GetService<ChatModule>();
+            chatModule.Start();
 
-            // var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
-            // chatModule.SubscribeToNewMessages(userMessagesCountHandler);
-            // chatModule.SubscribeToCommands(userMessagesCountHandler);
-
-            //ircManager.Subscribe(userMessagesCountHandler);
+            var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
+            var userPointsHandler = serviceProvider.GetService<UserPoints>();
+            var roulettePointsHandler = serviceProvider.GetService<RoulettePoints>();
+            chatModule.SubscribeToNewMessages(userMessagesCountHandler);
+            chatModule.SubscribeToCommands(userMessagesCountHandler);
+            chatModule.SubscribeToCommands(userPointsHandler);
+            chatModule.SubscribeToCommands(roulettePointsHandler);
             #endregion
 
             Thread.Sleep(10000000);
@@ -41,10 +42,12 @@ namespace YarakiiBot
 
         private static void ConfigureSingletons(IServiceCollection serviceCollection){
             serviceCollection.AddTransient<ILogger, Logger>();
-            serviceCollection.AddSingleton<DatabaseContext,DatabaseContext>();
+            serviceCollection.AddTransient<DatabaseContext,DatabaseContext>();
             serviceCollection.AddSingleton<UserMessagesCount,UserMessagesCount>();
+            serviceCollection.AddSingleton<UserPoints,UserPoints>();
             serviceCollection.AddSingleton<ChatModule,ChatModule>();
             serviceCollection.AddSingleton<RewardActiveUsersModule,RewardActiveUsersModule>();
+            serviceCollection.AddSingleton<RoulettePoints,RoulettePoints>();
         }
 
         private static void ConfigureSettings(IServiceCollection serviceCollection){

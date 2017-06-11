@@ -18,6 +18,13 @@ namespace YarakiiBot.Model{
             return task.Result;
         }
 
+        public void RewardUsersForWatchingStream(IEnumerable<string> usernames){
+            foreach(var username in usernames){
+                this.AddPointsToUser(username, 5);
+            }
+            SaveChangesAsync();
+        }
+
         public void AddPointsToUser(string nickname, int points){
             var task = Users.SingleOrDefaultAsync(u => u.Username == nickname);
             task.Wait();
