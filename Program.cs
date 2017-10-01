@@ -31,10 +31,12 @@ namespace YarakiiBot
             var userMessagesCountHandler = serviceProvider.GetService<UserMessagesCount>();
             var userPointsHandler = serviceProvider.GetService<UserPoints>();
             var roulettePointsHandler = serviceProvider.GetService<RoulettePoints>();
+            var basicCommandsHandler = serviceProvider.GetService<BasicCommands>();
             chatModule.SubscribeToNewMessages(userMessagesCountHandler);
             chatModule.SubscribeToCommands(userMessagesCountHandler);
             chatModule.SubscribeToCommands(userPointsHandler);
             chatModule.SubscribeToCommands(roulettePointsHandler);
+            chatModule.SubscribeToCommands(basicCommandsHandler);
             #endregion
 
             Thread.Sleep(10000000);
@@ -48,6 +50,7 @@ namespace YarakiiBot
             serviceCollection.AddSingleton<ChatModule,ChatModule>();
             serviceCollection.AddSingleton<RewardActiveUsersModule,RewardActiveUsersModule>();
             serviceCollection.AddSingleton<RoulettePoints,RoulettePoints>();
+            serviceCollection.AddSingleton<BasicCommands, BasicCommands>();
         }
 
         private static void ConfigureSettings(IServiceCollection serviceCollection){

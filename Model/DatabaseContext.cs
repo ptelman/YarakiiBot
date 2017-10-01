@@ -6,6 +6,7 @@ namespace YarakiiBot.Model{
     {
         public DbSet<User> Users { get; set; }
         public DbSet<SongRequest> SongRequests { get; set; }
+        public DbSet<ChatCommand> ChatCommands { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -61,6 +62,40 @@ namespace YarakiiBot.Model{
                 Users.Update(user);
             }
             SaveChanges();
+        }
+
+        public void UpdateChatCommand(string command, string response){
+            var task = ChatCommands.SingleOrDefaultAsync(u => u.Command == command);
+            task.Wait();
+            ChatCommand chatCommand = task.Result;
+            if (chatCommand == null){
+                AddChatCommand(command, response);
+            }
+            else{
+                chatCommand.Response = response;
+                ChatCommands.Update(chatCommand);
+                SaveChanges();
+            }
+        }
+
+        private void AddChatCommand(string command, string response){
+            ChatCommand chatCommand = new ChatCommand()
+            {
+                Command = command,
+                Response = response
+            };
+            ChatCommands.Add(chatCommand);
+            SaveChanges();
+        }
+
+        public void RemoveChatCommand(string command){
+            var task = ChatCommands.SingleOrDefaultAsync(u => u.Command == command);
+            task.Wait();
+            ChatCommand chatCommand = task.Result;
+            if (chatCommand != null){
+                ChatCommands.Remove(chatCommand);
+                SaveChanges();
+            }
         }
     }
 }
